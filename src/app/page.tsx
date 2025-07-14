@@ -2,8 +2,7 @@
 
 import { useState, useRef } from 'react';
 import html2canvas from 'html2canvas';
-import { DocumentArrowDownIcon, EyeIcon } from '@heroicons/react/24/outline';
-// import { saveInvoice } from '@/lib/db';
+import { DocumentArrowDownIcon } from '@heroicons/react/24/outline';
 
 export default function Home() {
   const [invoiceData, setInvoiceData] = useState({
@@ -68,8 +67,6 @@ export default function Home() {
   };
 
     const totals = calculateTotal();
-  const [showPreview, setShowPreview] = useState(false);
-
   return (
     <div className="min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
@@ -217,17 +214,10 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="flex gap-4">
-          <button
-            onClick={() => setShowPreview(true)}
-            className="w-full bg-gray-200 text-gray-800 px-6 py-3 rounded-md hover:bg-gray-300 transition-colors flex items-center justify-center gap-2"
-          >
-            <EyeIcon className="h-5 w-5" />
-            Preview Invoice
-          </button>
+        <div className="flex justify-center">
           <button
             onClick={downloadInvoice}
-            className="w-full bg-accent text-white px-6 py-3 rounded-md hover:bg-blue-600 transition-colors flex items-center justify-center gap-2"
+            className="w-full max-w-md bg-accent text-white px-6 py-3 rounded-md hover:bg-blue-600 transition-colors flex items-center justify-center gap-2"
           >
             <DocumentArrowDownIcon className="h-5 w-5" />
             Download Invoice as PNG

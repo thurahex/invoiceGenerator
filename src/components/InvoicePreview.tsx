@@ -1,13 +1,28 @@
 import { useState } from 'react';
-import { Invoice, InvoiceItem } from '@prisma/client';
+import { DocumentArrowDownIcon } from '@heroicons/react/24/outline';
 
-type InvoiceWithItems = Invoice & {
-  items: InvoiceItem[];
+// Define custom interfaces to replace Prisma types
+interface InvoiceItem {
+  description: string;
+  amount: number;
+}
+
+interface Invoice {
+  id: number;
+  status: string;
+  date: Date | string;
   customerName: string;
-};
+  usdToThbRate: number;
+  thbToMmkRate: number;
+  totalUsd: number;
+  totalThb: number;
+  totalMmk: number;
+  finalMmk: number;
+  items: InvoiceItem[];
+}
 
 interface InvoicePreviewProps {
-  invoice: InvoiceWithItems;
+  invoice: Invoice;
   onClose: () => void;
   onDownload: () => void;
 }
@@ -101,11 +116,9 @@ export default function InvoicePreview({ invoice, onClose, onDownload }: Invoice
           </button>
           <button
             onClick={onDownload}
-            className="px-6 py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-medium transition-colors flex items-center gap-2"
+            className="px-6 py-2.5 bg-primary text-white rounded-lg hover:bg-primary-dark font-medium transition-colors flex items-center"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-              <path fillRule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clipRule="evenodd" />
-            </svg>
+            <DocumentArrowDownIcon className="w-5 h-5 mr-2" />
             Download
           </button>
         </div>
